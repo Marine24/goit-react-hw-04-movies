@@ -1,0 +1,15 @@
+.nav_list {
+  list-style: none;
+  display: flex;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+.nav_item {
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 26px;
+  color: black;
+}
+.active {
+  color: rgb(255, 38, 0);
+}

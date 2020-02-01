@@ -1,0 +1,18 @@
+.list {
+  display: flex;
+  list-style: none;
+  max-width: 1600px;
+  flex-wrap: wrap;
+}
+.list_item {
+  margin-left: 20px;
+  width: 300px;
+  height: 550px;
+}
+.photo {
+  background-image: url(./person.png);
+
+  width: 300px;
+  height: 450px;
+  display: block;
+}

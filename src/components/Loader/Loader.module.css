@@ -1,0 +1,12 @@
+.Loader {
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: #f7f6fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
