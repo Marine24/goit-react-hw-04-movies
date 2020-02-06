@@ -47,8 +47,9 @@ class MovieDetailsPage extends Component {
   };
 
   onBackButton = () => {
-    const { history } = this.props;
-    history.goBack();
+    this.props.history.push({
+      pathname: '/',
+    });
   };
 
   render() {
@@ -56,7 +57,7 @@ class MovieDetailsPage extends Component {
     const { match } = this.props;
 
     return (
-      <>
+      <div className={style.container_page}>
         {isLoading && <Loader />}
         <button
           type="button"
@@ -86,25 +87,27 @@ class MovieDetailsPage extends Component {
             </p>
           </div>
         </div>
-        <h3 className={style.info_title}>Additional information</h3>
-        <Link className={style.cast} to={`${match.url}/cast`}>
-          <span className={style.cast_narrow}>&#9733;</span> Cast
-        </Link>
-        <p />
-        <Route
-          exact
-          path={routes.CAST.path}
-          component={routes.CAST.component}
-        />
-        <Link className={style.review} to={`${match.url}/reviews`}>
-          <span className={style.cast_narrow}>&#x2665; </span>Reviews
-        </Link>
-        <Route
-          exact
-          path={routes.REVIEWS.path}
-          component={routes.REVIEWS.component}
-        />
-      </>
+        <div className={style.container2}>
+          <h3 className={style.info_title}>Additional information</h3>
+          <Link className={style.cast} to={`${match.url}/cast`}>
+            <span className={style.cast_narrow}>&#9733;</span> Cast
+          </Link>
+          <p />
+          <Route
+            exact
+            path={routes.CAST.path}
+            component={routes.CAST.component}
+          />
+          <Link className={style.review} to={`${match.url}/reviews`}>
+            <span className={style.cast_narrow}>&#x2665; </span>Reviews
+          </Link>
+          <Route
+            exact
+            path={routes.REVIEWS.path}
+            component={routes.REVIEWS.component}
+          />
+        </div>
+      </div>
     );
   }
 }

@@ -1,14 +1,38 @@
 .movie_list {
   list-style: none;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  width: 1600px;
+  margin: 0 auto;
+}
+.list_item {
+  box-shadow: 2px 2px 2px 1px rgba(4, 2, 138, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  width: 340px;
+  height: 540px;
+  padding: 20px 20px 30px;
+  margin: 10px;
+
+  justify-content: center;
 }
 .home_title {
-  font-size: 34px;
+  text-transform: uppercase;
+  font-size: 52px;
+  text-align: center;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+  color: rgb(3, 3, 109);
 }
-.list_name {
+.list_item_link {
   font-size: 24px;
   text-decoration: none;
-  color: rgb(4, 0, 8);
+  text-transform: uppercase;
+  color: rgb(14, 4, 107);
 }
-.list_name:hover {
-  text-decoration: underline;
+.list_name_title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
 }

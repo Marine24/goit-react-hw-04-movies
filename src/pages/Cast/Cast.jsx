@@ -35,8 +35,8 @@ class Cast extends Component {
                 src={`https://image.tmdb.org/t/p/w300${el.profile_path}`}
                 alt=""
               />
-              <p>{el.name}</p>
-              <p>{el.character}</p>
+              <p className={style.name}>Name: {el.name}</p>
+              <p className={style.name}>Character: {el.character}</p>
             </li>
           ))}
         </ul>

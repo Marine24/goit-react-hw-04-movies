@@ -1,15 +1,21 @@
 .nav_list {
   list-style: none;
   display: flex;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  padding: 10px;
+  box-shadow: 2px 2px 2px 1px rgba(15, 4, 109, 0.2);
+  padding: 15px;
+  justify-content: center;
 }
 .nav_item {
+  text-transform: uppercase;
   text-decoration: none;
-  margin-left: 20px;
-  font-size: 26px;
-  color: black;
+  margin-left: 70px;
+  font-size: 32px;
+  color: rgb(15, 3, 124);
+  font-family: Geneva, Arial, Helvetica, sans-serif;
 }
 .active {
-  color: rgb(255, 38, 0);
+  color: rgb(7, 129, 160);
+}
+.nav_item:hover {
+  text-decoration: underline;
 }

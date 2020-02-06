@@ -16,18 +16,22 @@ class HomePage extends Component {
     const { movies } = this.state;
 
     return (
-      <>
-        <p className={style.home_title}>Trending films today</p>
+      <div className={style.container}>
+        <p className={style.home_title}>trending films today</p>
         <ul className={style.movie_list}>
           {movies.map(movie => (
-            <li key={movie.id}>
-              <Link className={style.list_name} to={`/movies/${movie.id}`}>
-                {movie.title}
+            <li className={style.list_item} key={movie.id}>
+              <Link to={`/movies/${movie.id}`} className={style.list_item_link}>
+                <p className={style.list_name_title}>{movie.title}</p>
+                <img
+                  src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+                  alt=""
+                />
               </Link>
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
 }
