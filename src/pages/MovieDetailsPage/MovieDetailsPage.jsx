@@ -18,6 +18,7 @@ class MovieDetailsPage extends Component {
       goBack: T.func,
       push: T.func,
     }).isRequired,
+    location: T.instanceOf(Object).isRequired,
   };
 
   state = {
@@ -47,9 +48,8 @@ class MovieDetailsPage extends Component {
   };
 
   onBackButton = () => {
-    this.props.history.push({
-      pathname: '/',
-    });
+    const { history } = this.props;
+    history.goBack();
   };
 
   render() {
@@ -89,7 +89,7 @@ class MovieDetailsPage extends Component {
         </div>
         <div className={style.container2}>
           <h3 className={style.info_title}>Additional information</h3>
-          <Link className={style.cast} to={`${match.url}/cast`}>
+          <Link className={style.cast} replace to={`${match.url}/cast`}>
             <span className={style.cast_narrow}>&#9733;</span> Cast
           </Link>
           <p />

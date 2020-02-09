@@ -37,7 +37,7 @@ class MoviesPage extends Component {
     const { history } = this.props;
     history.push({
       ...this.props.location,
-      search: `search=${query}`,
+      search: `query=${query}`,
     });
   };
 
