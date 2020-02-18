@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import T from 'prop-types';
 import * as API from '../../services/Api';
 import routes from '../../routes/routes';
@@ -24,6 +24,7 @@ class MovieDetailsPage extends Component {
   state = {
     movie: { genres: [] },
     isLoading: false,
+    isActive: false,
   };
 
   componentDidMount() {
@@ -47,67 +48,97 @@ class MovieDetailsPage extends Component {
       });
   };
 
+  toggleMenu = () => {
+    const { isActive } = this.state;
+    this.setState({
+      isActive: !isActive,
+    });
+  };
+
   onBackButton = () => {
-    const { history } = this.props;
-    history.goBack();
+    const { history, location } = this.props;
+
+    if (location.state) {
+      history.goBack();
+    }
+
+    history.push(routes.HOME_PAGE.path);
   };
 
   render() {
-    const { movie, isLoading } = this.state;
+    const { movie, isLoading, isActive } = this.state;
     const { match } = this.props;
 
     return (
-      <div className={style.container_page}>
-        {isLoading && <Loader />}
-        <button
-          type="button"
-          onClick={this.onBackButton}
-          className={style.button}
-        >
-          Back
-        </button>
-        <div className={style.container}>
-          <img
-            src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-            alt=""
-          />
-          <div className={style.info}>
-            <h2 className={style.movie_title}>
-              {movie.original_title} ({movie.release_date})
-            </h2>
-            <p className={style.movie_score}>
-              User score: {movie.vote_average * 10}%
-            </p>
-            <h3 className={style.movie_overview_title}>Overview</h3>
+      <>
+        <div className={style.container_page}>
+          {isLoading && <Loader />}
+          <button
+            type="button"
+            onClick={this.onBackButton}
+            className={style.button}
+          >
+            Back
+          </button>
+          <div className={style.container}>
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+              alt=""
+            />
+            <div className={style.info}>
+              <h2 className={style.movie_title}>
+                {movie.original_title} ({movie.release_date})
+              </h2>
+              <p className={style.movie_score}>
+                User score: {movie.vote_average * 10}%
+              </p>
+              <h3 className={style.movie_overview_title}>Overview</h3>
 
-            <p className={style.movie_overview}>{movie.overview}</p>
-            <h3 className={style.movie_genres_title}>Genres</h3>
-            <p className={style.movie_genres}>
-              {movie.genres.map(item => ` ${item.name} `)}
-            </p>
+              <p className={style.movie_overview}>{movie.overview}</p>
+              <h3 className={style.movie_genres_title}>Genres</h3>
+              <p className={style.movie_genres}>
+                {movie.genres.map(item => ` ${item.name} `)}
+              </p>
+            </div>
           </div>
         </div>
         <div className={style.container2}>
           <h3 className={style.info_title}>Additional information</h3>
-          <Link className={style.cast} replace to={`${match.url}/cast`}>
+          <NavLink
+            onClick={this.toggleMenu}
+            className={style.cast}
+            to={`${match.url}/cast`}
+          >
             <span className={style.cast_narrow}>&#9733;</span> Cast
-          </Link>
+          </NavLink>
           <p />
-          <Route
-            exact
-            path={routes.CAST.path}
-            component={routes.CAST.component}
-          />
-          <Link className={style.review} to={`${match.url}/reviews`}>
+          {isActive ? (
+            <Route
+              exact
+              path={routes.CAST.path}
+              component={routes.CAST.component}
+            />
+          ) : (
+            ``
+          )}
+          <NavLink
+            onClick={this.toggleMenu}
+            className={style.review}
+            to={`${match.url}/reviews`}
+          >
             <span className={style.cast_narrow}>&#x2665; </span>Reviews
-          </Link>
-          <Route
-            exact
-            path={routes.REVIEWS.path}
-            component={routes.REVIEWS.component}
-          />
+          </NavLink>
+          {isActive ? (
+            <Route
+              exact
+              path={routes.REVIEWS.path}
+              component={routes.REVIEWS.component}
+            />
+          ) : (
+            ``
+          )}
         </div>
-      </div>
+      </>
     );
   }
 }
