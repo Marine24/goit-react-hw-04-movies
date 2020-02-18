@@ -56,12 +56,12 @@ class MovieDetailsPage extends Component {
   };
 
   onBackButton = () => {
-    const { history, location } = this.props;
-
-    if (location.state) {
-      history.goBack();
+    const { state } = this.props.location;
+    const { history } = this.props;
+    if (state && state.from) {
+      this.props.history.push(state.from);
+      return;
     }
-
     history.push(routes.HOME_PAGE.path);
   };
 
@@ -105,6 +105,7 @@ class MovieDetailsPage extends Component {
         <div className={style.container2}>
           <h3 className={style.info_title}>Additional information</h3>
           <NavLink
+            replace
             onClick={this.toggleMenu}
             className={style.cast}
             to={`${match.url}/cast`}
