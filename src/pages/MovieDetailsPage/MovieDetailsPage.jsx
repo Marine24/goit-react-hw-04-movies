@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import React, { Component, Suspense } from 'react';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import T from 'prop-types';
 import * as API from '../../services/Api';
 import routes from '../../routes/routes';
@@ -104,40 +104,40 @@ class MovieDetailsPage extends Component {
         </div>
         <div className={style.container2}>
           <h3 className={style.info_title}>Additional information</h3>
-          <NavLink
-            replace
-            onClick={this.toggleMenu}
-            className={style.cast}
-            to={`${match.url}/cast`}
-          >
-            <span className={style.cast_narrow}>&#9733;</span> Cast
-          </NavLink>
-          <p />
-          {isActive ? (
-            <Route
-              exact
-              path={routes.CAST.path}
-              component={routes.CAST.component}
-            />
-          ) : (
-            ``
-          )}
-          <NavLink
-            onClick={this.toggleMenu}
-            className={style.review}
-            to={`${match.url}/reviews`}
-          >
-            <span className={style.cast_narrow}>&#x2665; </span>Reviews
-          </NavLink>
-          {isActive ? (
-            <Route
-              exact
-              path={routes.REVIEWS.path}
-              component={routes.REVIEWS.component}
-            />
-          ) : (
-            ``
-          )}
+          <Suspense>
+            <NavLink
+              replace
+              onClick={this.toggleMenu}
+              className={style.cast}
+              to={`${match.url}/cast`}
+            >
+              <span className={style.cast_narrow}>&#9733;</span> Cast
+            </NavLink>
+            <p />
+            {isActive ? (
+              <Route
+                path={routes.CAST.path}
+                component={routes.CAST.component}
+              />
+            ) : (
+              ``
+            )}
+            <NavLink
+              onClick={this.toggleMenu}
+              className={style.review}
+              to={`${match.url}/reviews`}
+            >
+              <span className={style.cast_narrow}>&#x2665; </span>Reviews
+            </NavLink>
+            {isActive ? (
+              <Route
+                path={routes.REVIEWS.path}
+                component={routes.REVIEWS.component}
+              />
+            ) : (
+              ``
+            )}
+          </Suspense>
         </div>
       </>
     );
