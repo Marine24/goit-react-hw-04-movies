@@ -24,7 +24,8 @@ class MovieDetailsPage extends Component {
   state = {
     movie: { genres: [] },
     isLoading: false,
-    isActive: false,
+    isActiveC: false,
+    isActiveR: false,
   };
 
   componentDidMount() {
@@ -48,25 +49,27 @@ class MovieDetailsPage extends Component {
       });
   };
 
-  toggleMenu = () => {
-    const { isActive } = this.state;
+  toggleMenuC = () => {
+    const { isActiveC } = this.state;
     this.setState({
-      isActive: !isActive,
+      isActiveC: !isActiveC,
+    });
+  };
+
+  toggleMenuR = () => {
+    const { isActiveR } = this.state;
+    this.setState({
+      isActiveR: !isActiveR,
     });
   };
 
   onBackButton = () => {
-    const { state } = this.props.location;
     const { history } = this.props;
-    if (state && state.from) {
-      this.props.history.push(state.from);
-      return;
-    }
-    history.push(routes.HOME_PAGE.path);
+    history.goBack();
   };
 
   render() {
-    const { movie, isLoading, isActive } = this.state;
+    const { movie, isLoading, isActiveC, isActiveR } = this.state;
     const { match } = this.props;
 
     return (
@@ -107,14 +110,14 @@ class MovieDetailsPage extends Component {
           <Suspense>
             <NavLink
               replace
-              onClick={this.toggleMenu}
+              onClick={this.toggleMenuC}
               className={style.cast}
               to={`${match.url}/cast`}
             >
               <span className={style.cast_narrow}>&#9733;</span> Cast
             </NavLink>
             <p />
-            {isActive ? (
+            {isActiveC ? (
               <Route
                 path={routes.CAST.path}
                 component={routes.CAST.component}
@@ -123,13 +126,14 @@ class MovieDetailsPage extends Component {
               ``
             )}
             <NavLink
-              onClick={this.toggleMenu}
+              replace
+              onClick={this.toggleMenuR}
               className={style.review}
               to={`${match.url}/reviews`}
             >
               <span className={style.cast_narrow}>&#x2665; </span>Reviews
             </NavLink>
-            {isActive ? (
+            {isActiveR ? (
               <Route
                 path={routes.REVIEWS.path}
                 component={routes.REVIEWS.component}
